@@ -51,7 +51,7 @@ export default function Hero() {
                 }}
               >
                 <Image
-                  src="/images/profile_5.JPG"
+                  src="/images/profile5.JPG"
                   alt="Prasiddha Bhattarai"
                   fill
                   className="object-cover grayscale hover:grayscale-0 transition-all duration-500"
