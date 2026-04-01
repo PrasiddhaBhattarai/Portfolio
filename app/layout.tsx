@@ -59,13 +59,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <head>
-        lang="en"
-      suppressHydrationWarning
+    <html
+      lang="en"
       className={`${dmSans.className} ${instrumentSerif.className} ${jetBrainsMono.className}`}
-        />
-      </head>
+      suppressHydrationWarning
+    >
+      <head />
       <body>
         <ThemeProvider>{children}</ThemeProvider>
       </body>
