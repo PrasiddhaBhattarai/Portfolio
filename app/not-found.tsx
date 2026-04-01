@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
-
+"use client";
 export default function NotFound() {
   return (
     <>

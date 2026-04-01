@@ -3,6 +3,7 @@ import { getAllPosts } from "@/lib/mdx";
 import Navbar from "@/components/Navbar";
 import PostCard from "@/components/PostCard";
 import Footer from "@/components/Footer";
+export const dynamic = "force-dynamic"; // disables static generation
 
 export const metadata: Metadata = {
   title: "Blog",
