@@ -1,0 +1,57 @@
+---
+title: "You don't know what you don't know!"
+date: "2021-06-02"
+excerpt: "When working with computers, we often encounter issues we never anticipate. Debugging is hard precisely because unknown unknowns hide in plain sight."
+tags: ["engineering", "debugging"]
+---
+
+When working with computers, we often encounter issues that we never anticipate. If you have written a piece of software, you might have faced issues where something goes haywire, but you don't know the root cause behind it. These issues could have come from the code itself, the operating system, the network, an external dependency or something else.
+
+It can often be intimidating to debug these issues because it needs a thorough root cause analysis before we can patch them. For example, let's say you have a memory leak in your code, and every so often, your backend service goes down because it is asking for more memory than what the system has.
+
+The classic makeshift solution to something like this is to turn the service off and on again, and yes, the heap is free. However, the fair resolution is to figure out that it is an actual memory leak, find the culprit code, and patch it up.
+
+## The Dunning-Kruger Effect in Engineering
+
+This problem extends beyond memory leaks. It applies to every aspect of software engineering — security vulnerabilities you haven't thought about, performance bottlenecks lurking in code paths you never test, race conditions that only surface under load.
+
+> The dangerous engineer isn't the one who knows little — it's the one who doesn't know *how much* they don't know.
+
+The most experienced engineers I've met share a common trait: they're deeply, almost uncomfortably aware of the limits of their knowledge. They ask questions like:
+
+- What happens at the edges?
+- What's the failure mode?
+- What am I assuming here that might not be true?
+
+## Building Systems That Surface Unknown Unknowns
+
+Here's what I've found actually helps:
+
+**Observability over guessing.** Instrument everything. If you can't see it, you can't reason about it. Logs, metrics, traces — not just at the happy path, but at every error boundary.
+
+**Chaos engineering.** Netflix's chaos monkey isn't a joke. Deliberately break things in controlled ways to discover what breaks uncontrolled. You will be surprised.
+
+**Code review with adversarial intent.** Don't just review for style and correctness. Ask: *how does this break?* Play the skeptic.
+
+```typescript
+// What happens if `user` is null here?
+// What if `data.items` is an empty array?
+// What if the network times out mid-response?
+function processUserData(user: User, data: ApiResponse) {
+  const items = data.items.map(transform);
+  return { user: user.id, items };
+}
+```
+
+## Staying Humble
+
+The meta-lesson is humility. Every production incident I've witnessed was, in hindsight, something *someone could have anticipated* — but nobody did. Not because they were careless, but because unknown unknowns are, by definition, invisible until they aren't.
+
+The best antidote is:
+
+1. Build feedback loops early
+2. Treat every incident as a learning opportunity — no blame, just learning
+3. Document what you discover — your future self will thank you
+4. Read widely, especially failure post-mortems from other teams
+
+The goal isn't to know everything. It's to shrink the gap between what you know and what you don't — incrementally, patiently, permanently.

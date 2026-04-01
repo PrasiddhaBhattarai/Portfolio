@@ -1,0 +1,77 @@
+---
+title: "Things I wish I knew about distributed systems"
+date: "2022-11-04"
+excerpt: "Fallacies, hard lessons, and the slow acceptance that networks are fundamentally unreliable — and that's okay."
+tags: ["engineering", "distributed-systems"]
+---
+
+I spent my first two years as a backend engineer writing code that assumed the network was reliable. It wasn't a conscious assumption — I just never thought about it. Functions called APIs. APIs returned data. Data got stored. It worked.
+
+Then I started working on systems that actually had to stay up, and everything I hadn't thought about started mattering a great deal.
+
+## The eight fallacies (that everyone ignores until they hurt you)
+
+Peter Deutsch wrote the eight fallacies of distributed computing in the 90s. They're still true. Almost every distributed systems bug I've seen traces back to one of them:
+
+1. The network is reliable
+2. Latency is zero
+3. Bandwidth is infinite
+4. The network is secure
+5. Topology doesn't change
+6. There is one administrator
+7. Transport cost is zero
+8. The network is homogeneous
+
+You will nod reading this list. You will then write code that violates items 1, 2, and 3 within the hour.
+
+## Idempotency is not optional
+
+If your system receives a message and processes it, what happens when the network hiccups and the message is delivered again?
+
+Most engineers answer: "that shouldn't happen." It does. It will. Design for it.
+
+Idempotency means: processing the same operation twice has the same effect as processing it once. This sounds simple. Implementing it correctly in a system with multiple services, databases, and queues is genuinely hard.
+
+```typescript
+// Naive — not idempotent
+async function chargeUser(userId: string, amount: number) {
+  await db.insert({ userId, amount, timestamp: Date.now() });
+  await stripe.charge(userId, amount);
+}
+
+// Better — idempotent with an idempotency key
+async function chargeUser(userId: string, amount: number, idempotencyKey: string) {
+  const existing = await db.find({ idempotencyKey });
+  if (existing) return existing; // already processed
+  
+  const charge = await stripe.charge(userId, amount, { idempotencyKey });
+  await db.insert({ idempotencyKey, userId, amount, chargeId: charge.id });
+  return charge;
+}
+```
+
+## Consistency vs. availability — you actually have to choose
+
+CAP theorem says: in the presence of a network partition, you can have consistency or availability, not both.
+
+Most engineers treat this as a theoretical curiosity. It isn't. Every time you design a system that needs to stay available while also having correct data, you are making a CAP tradeoff — whether you know it or not.
+
+The honest conversation to have with your team is: *when things go wrong, would you rather show stale data or show an error?*
+
+There is no universally right answer. There is an answer that's right for your use case. Make it explicit.
+
+## Timeouts are a feature, not a failure
+
+I used to hate adding timeouts to network calls. It felt like admitting defeat. Like I was planning to fail.
+
+Now I think a missing timeout is a bug. A service that waits indefinitely for a response it will never get takes down everything connected to it. A service with a 500ms timeout on an external call fails fast, logs the error, and keeps serving the other 99% of requests that are fine.
+
+Fail fast. Fail loud. Recover gracefully.
+
+## The lesson that took the longest
+
+The hardest thing about distributed systems isn't the theory. It's accepting that your system *will* fail in ways you didn't design for, and building the observability and resilience to survive it anyway.
+
+You won't anticipate everything. That's okay. What matters is how quickly you can detect, diagnose, and recover.
+
+That's the job.
