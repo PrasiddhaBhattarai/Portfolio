@@ -265,30 +265,6 @@ export default function Hero() {
               </svg>
               download resume
             </a>
-
-            {/* View Blog */}
-            {/* <Link
-              href="/blog"
-              className="
-                inline-flex items-center gap-2
-                px-5 py-2.5 rounded-md
-                font-mono text-xs tracking-wider
-                transition-all duration-200
-                hover:scale-[1.02]
-                active:scale-[0.98]
-              "
-              style={{
-                backgroundColor: "var(--bg-card)",
-                color: "var(--text-sec)",
-                border: "1px solid var(--border)",
-              }}
-            >
-              read the blog
-              <svg className="w-3 h-3" viewBox="0 0 24 24" fill="none"
-                stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M5 12h14M12 5l7 7-7 7" />
-              </svg>
-            </Link> */}
           </motion.div>
         </motion.div>
 

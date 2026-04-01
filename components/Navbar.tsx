@@ -61,8 +61,6 @@ export default function Navbar() {
         {/* Desktop nav */}
         <div className="hidden sm:flex items-center gap-7">
           <NavLink href="/">home</NavLink>
-          {/* <NavLink href="/blog">blog</NavLink> */}
-          {/* <NavLink href="/#about">about</NavLink> */}
           <NavLink href="mailto:prasiddhabhattarai333@gmail.com">contact</NavLink>
 
           {/* Theme toggle */}
@@ -104,8 +102,6 @@ export default function Navbar() {
           className="sm:hidden border-b px-6 pb-5 pt-2 flex flex-col gap-1"
         >
           <MobileNavLink href="/" onClick={() => setMenuOpen(false)}>home</MobileNavLink>
-          {/* <MobileNavLink href="/blog" onClick={() => setMenuOpen(false)}>blog</MobileNavLink> */}
-          {/* <MobileNavLink href="/#about" onClick={() => setMenuOpen(false)}>about</MobileNavLink> */}
           <MobileNavLink href="mailto:prasiddhabhattarai333@gmail.com" onClick={() => setMenuOpen(false)}>contact</MobileNavLink>
         </div>
       )}
