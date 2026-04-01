@@ -24,6 +24,7 @@ function MoonIcon() {
   );
 }
 
+/* ─── Navbar ──────────────────────────────────────────────── */
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -44,10 +45,6 @@ export default function Navbar() {
       className="fixed top-0 left-0 right-0 z-50 transition-all duration-300 backdrop-blur-[0px] border-b"
       data-scrolled={scrolled}
     >
-      {/* <style>{`
-        header[data-scrolled="true"] { backdrop-filter: blur(12px); }
-      `}</style> */}
-
       <nav className="max-w-6xl mx-auto px-6 lg:px-10 h-14 flex items-center justify-between">
         {/* Logo */}
         <Link
@@ -67,7 +64,7 @@ export default function Navbar() {
           <ThemeToggle theme={theme} toggle={toggle} />
         </div>
 
-        {/* Mobile: toggle + hamburger */}
+        {/* Mobile toggle */}
         <div className="sm:hidden flex items-center gap-3">
           <ThemeToggle theme={theme} toggle={toggle} />
           <button
@@ -83,7 +80,9 @@ export default function Navbar() {
             />
             <span
               style={{ backgroundColor: "var(--text-sec)" }}
-              className={`block w-5 h-px transition-all duration-200 ${menuOpen ? "opacity-0" : ""}`}
+              className={`block w-5 h-px transition-all duration-200 ${
+                menuOpen ? "opacity-0" : ""
+              }`}
             />
             <span
               style={{ backgroundColor: "var(--text-sec)" }}
@@ -134,34 +133,46 @@ function ThemeToggle({ theme, toggle }: { theme: string; toggle: () => void }) {
 /* ─── Desktop Nav Link ──────────────────────────────────────── */
 function NavLink({ href, children }: { href: string; children: React.ReactNode }) {
   const isExternal = href.startsWith("mailto:");
-  const Tag = isExternal ? "a" : Link;
+
+  if (isExternal) {
+    return (
+      <a
+        href={href}
+        className="font-mono text-xs tracking-wider transition-colors duration-200"
+        style={{ color: "var(--text-muted)" }}
+        onMouseEnter={(e) => (e.currentTarget.style.color = "var(--text-sec)")}
+        onMouseLeave={(e) => (e.currentTarget.style.color = "var(--text-muted)")}
+      >
+        {children}
+      </a>
+    );
+  }
+
   return (
-    <Tag
-      href={href}
-      className="font-mono text-xs tracking-wider transition-colors duration-200"
-      style={{ color: "var(--text-muted)" }}
-      onMouseEnter={(e) => (e.currentTarget.style.color = "var(--text-sec)")}
-      onMouseLeave={(e) => (e.currentTarget.style.color = "var(--text-muted)")}
-    >
-      {children}
-    </Tag>
+    <Link href={href}>
+      <span
+        className="font-mono text-xs tracking-wider transition-colors duration-200 cursor-pointer"
+        style={{ color: "var(--text-muted)" }}
+        onMouseEnter={(e) => (e.currentTarget.style.color = "var(--text-sec)")}
+        onMouseLeave={(e) => (e.currentTarget.style.color = "var(--text-muted)")}
+      >
+        {children}
+      </span>
+    </Link>
   );
 }
 
 /* ─── Mobile Nav Link ───────────────────────────────────────── */
-function MobileNavLink({
-  href, onClick, children,
-}: {
-  href: string; onClick: () => void; children: React.ReactNode;
-}) {
+function MobileNavLink({ href, onClick, children }: { href: string; onClick: () => void; children: React.ReactNode }) {
   return (
-    <Link
-      href={href}
-      onClick={onClick}
-      className="font-mono text-sm py-3 transition-colors duration-200 border-t"
-      style={{ color: "var(--text-sec)", borderColor: "var(--border-sub)" }}
-    >
-      {children}
+    <Link href={href}>
+      <span
+        className="font-mono text-sm py-3 transition-colors duration-200 border-t block cursor-pointer"
+        style={{ color: "var(--text-sec)", borderColor: "var(--border-sub)" }}
+        onClick={onClick}
+      >
+        {children}
+      </span>
     </Link>
   );
 }
