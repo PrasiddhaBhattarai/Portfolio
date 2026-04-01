@@ -13,7 +13,7 @@ export default function NotFound() {
           nothing here
         </h1>
         <p className="text-[#5c5a56] text-sm font-light mb-10">
-          This page doesn't exist — or it used to and doesn't anymore.
+          This page doesn&apos;t exist — or it used to and doesn&apos;t anymore.
         </p>
         <Link
           href="/"
