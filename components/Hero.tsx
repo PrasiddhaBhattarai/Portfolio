@@ -101,7 +101,7 @@ export default function Hero() {
                     className="font-mono text-xs tracking-wide"
                     style={{ color: "var(--text-sec)" }}
                   >
-                    Software developer
+                    DevOps | Software developer
                   </span>
                   <span style={{ color: "var(--border)" }}>·</span>
                   {/* <span className="font-mono text-xs tracking-wide" style={{ color: "var(--text-muted)" }}>
@@ -173,12 +173,7 @@ export default function Hero() {
               className="text-base sm:text-lg leading-relaxed font-light"
               style={{ color: "var(--text-sec)" }}
             >
-              Hi — I&apos;m Prasiddha, a full-stack developer who enjoys
-              building practical web applications using Node.js, React, and
-              PostgreSQL. I like working on backend systems, APIs, and
-              geospatial features, and I&apos;m currently exploring DevOps and
-              infrastructure to better understand how applications scale and run
-              in production.
+              Hi — I&apos;m Prasiddha, AWS Certified Solutions Architect and CS graduate with hands-on experience in AWS, Docker, CI/CD pipelines, and observability tools like Prometheus and Grafana. Skilled in building and deploying production-ready systems using GitHub Actions, EC2, S3, and containerized architectures. Experienced in backend development and microservices with Node.js and Next.js, with a strong focus on automation, scalability, and system reliability. Seeking an entry-level DevOps or Cloud Engineer role to contribute to infrastructure automation, cloud operations, and reliable deployment systems..
             </p>
             {/* <p
               className="text-base leading-relaxed font-light"
