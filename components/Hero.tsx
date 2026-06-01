@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import SocialLinks from "./SocialLinks";
 import { motion } from "framer-motion";
+import CredlyBadge from "@/components/CredlyBadge";
 
 const FADE_UP = {
   hidden: { opacity: 0, y: 18 },
@@ -71,7 +72,8 @@ export default function Hero() {
                   variants={FADE_UP}
                   initial="hidden"
                   animate="show"
-                  className="font-serif text-3xl sm:text-[2.6rem] leading-none tracking-tight mb-3"
+                  // className="font-serif text-3xl sm:text-[2.6rem] leading-none tracking-tight mb-3"
+                  className="font-serif text-3xl sm:text-[3rem] md:text-[3.2rem] leading-none tracking-tight mb-3"
                   style={{ color: "var(--text-pri)" }}
                 >
                   Prasiddha Bhattarai
@@ -98,10 +100,10 @@ export default function Hero() {
                     <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" />
                   </svg>
                   <span
-                    className="font-mono text-xs tracking-wide"
+                    className="font-mono text-sm tracking-wide"
                     style={{ color: "var(--text-sec)" }}
                   >
-                    DevOps | Software developer
+                    DevOps Engineer | Software developer
                   </span>
                   <span style={{ color: "var(--border)" }}>·</span>
                   {/* <span className="font-mono text-xs tracking-wide" style={{ color: "var(--text-muted)" }}>
@@ -119,6 +121,9 @@ export default function Hero() {
               >
                 Hello
               </motion.p> */}
+              </div>
+              <div className="mt-4">
+                <CredlyBadge />
               </div>
             </div>
           </div>
@@ -173,7 +178,16 @@ export default function Hero() {
               className="text-base sm:text-lg leading-relaxed font-light"
               style={{ color: "var(--text-sec)" }}
             >
-              Hi — I&apos;m Prasiddha, AWS Certified Solutions Architect and CS graduate with hands-on experience in AWS, Docker, CI/CD pipelines, and observability tools like Prometheus and Grafana. Skilled in building and deploying production-ready systems using GitHub Actions, EC2, S3, and containerized architectures. Experienced in backend development and microservices with Node.js and Next.js, with a strong focus on automation, scalability, and system reliability. Seeking an entry-level DevOps or Cloud Engineer role to contribute to infrastructure automation, cloud operations, and reliable deployment systems..
+              Hi — I&apos;m Prasiddha, AWS Certified Solutions Architect and CS
+              graduate with hands-on experience in AWS, Docker, CI/CD pipelines,
+              and observability tools like Prometheus and Grafana. Skilled in
+              building and deploying production-ready systems using GitHub
+              Actions, EC2, S3, and containerized architectures. Experienced in
+              backend development and microservices with Node.js and Next.js,
+              with a strong focus on automation, scalability, and system
+              reliability. Seeking an entry-level DevOps or Cloud Engineer role
+              to contribute to infrastructure automation, cloud operations, and
+              reliable deployment systems..
             </p>
             {/* <p
               className="text-base leading-relaxed font-light"
